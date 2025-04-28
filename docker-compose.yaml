@@ -1,0 +1,72 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+    networks:
+      - kafka-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    networks:
+      - kafka-network
+    ports:
+      - "9092:9092"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hw-4
+    environment:
+      - MEMCACHED_HOST=memcached:11211
+      - DB_HOST=db
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      memcached:
+        condition: service_healthy
+      zookeeper:
+        condition: service_started
+      kafka:
+        condition: service_started
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "test"]  # Check if Postgres is ready
+      interval: 3s                               # Check every 3 seconds
+      timeout: 5s                                # Fail if no response in 5s
+      retries: 5                                 # Retry 5 times before failing
+      start_period: 10s
+  memcached:
+    build:
+      context: .
+      dockerfile: Dockerfile.memcached
+    container_name: hw-4-memcached
+    ports:
+      - "11211:11211"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "timeout", "1", "bash", "-c", "cat < /dev/null > /dev/tcp/localhost/11211"]
+      interval: 3s
+      timeout: 7s
+      retries: 3
+      start_period: 20s
+networks:
+  kafka-network:
+    driver: bridge

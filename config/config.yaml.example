@@ -1,0 +1,15 @@
+order_expiration_days: 2
+filter_word: ""
+test_credentials:
+  username: ""
+  password: ""
+
+db_user: ""
+db_pass: ""
+db_host: ""
+db_name: ""
+db_port: ""
+listen_address: ":"
+
+memcache_host: ""
+cron_job_interval: 5

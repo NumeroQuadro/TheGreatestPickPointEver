@@ -1,0 +1,24 @@
+# Exclude version control directories
+.git
+.gitignore
+
+# Exclude Go build artifacts
+bin/
+obj/
+*.exe
+*.out
+
+# Exclude dependency directories (if using vendoring, adjust accordingly)
+vendor/
+
+# Exclude IDE/editor configuration files
+.vscode/
+.idea/
+
+# Exclude temporary or log files
+*.log
+tmp/
+*.tmp
+
+# Exclude local environment files (if not needed)
+.env
