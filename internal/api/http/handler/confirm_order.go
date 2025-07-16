@@ -3,10 +3,11 @@ package handler
 import (
 	"encoding/json"
 	"errors"
-	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/domain"
-	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/service"
 	"net/http"
 	"time"
+
+	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/domain"
+	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/service"
 )
 
 type CreateOrderRequest struct {

@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"sync"
+	"time"
+
 	tech_monitoring "gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/api/grpc/monitoring"
 	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/api/grpc/tracing"
 	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/pkg/logger"
 	domain_monitoring "gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/pkg/monitoring"
-	"log"
-	"sync"
-	"time"
 
 	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/api/grpc/server"
 	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/config"
@@ -87,3 +88,4 @@ func main() {
 
 	defer logger.ZapLogger.Sync()
 }
+

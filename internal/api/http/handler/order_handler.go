@@ -5,12 +5,13 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/domain"
-	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/service"
-	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/workers"
 	"io"
 	"net/http"
 	"strconv"
+
+	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/domain"
+	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/service"
+	"gitlab.ozon.dev/dimabelunin7/homework/hw-4/internal/workers"
 )
 
 type OrderHandler struct {

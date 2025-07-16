@@ -1,0 +1,35 @@
+order_expiration_days: 2
+filter_word: "jesus let me pass lab-5"
+test_credentials:
+  username: "test"
+  password: "test"
+
+db_user: "test"
+db_pass: "test"
+db_host: "localhost"
+db_name: "test"
+db_port: "5432"
+listen_address: ":9000"
+grpc_listen_address: ":50051"
+
+memcache_host: "127.0.0.1:11211"
+cron_job_interval: 50
+
+metrics_port: ":8080"
+
+kafka:
+  brokers:
+    - "localhost:9092"
+
+  topic: "audit-events"
+
+  group_id: "audit-consumer-group"
+
+  partition: 0
+
+  buffer_size: 1
+
+  read_timeout_seconds: 10
+  write_timeout_seconds: 5
+
+  response_timeout_seconds: 10
